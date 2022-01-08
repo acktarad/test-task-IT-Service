@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class MagicSquare {
 
-    public int[] twoDimensionalArrayToOne(int[][] matrix){
+    public int[] twoDimensionalArrayToOne(int[][] matrix) {
         int count = 0;
         int[] tempArray = new int[matrix.length * matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
@@ -59,9 +59,9 @@ public class MagicSquare {
         int previous_x = x;
         int previous_y = y;
         for (int i = 0; i < tempArray.length; i++) {
-            if(i == 0)
+            if (i == 0)
                 outputArray[y][x] = tempArray[i];
-            else{
+            else {
                 x = x + 1;
                 y = y - 1;
                 if (y < 0 || x >= outputArray[0].length || y >= outputArray.length) {
@@ -72,7 +72,7 @@ public class MagicSquare {
                     if (y >= outputArray.length)
                         y = 0;
                 }
-                if(outputArray[y][x]!=0){
+                if (outputArray[y][x] != 0) {
                     x = previous_x;
                     y = previous_y + 1;
                 }
@@ -81,6 +81,22 @@ public class MagicSquare {
                 outputArray[y][x] = tempArray[i];
             }
         }
+        return outputArray;
+    }
+
+    public int[][][] getMagicSquareArray(int[][] inputArray) {
+        int[][][] outputArray = new int[8][inputArray.length][inputArray[0].length];
+        for (int k = 0; k < outputArray.length - 1; k += 2) {
+            if (k == 0) {
+                outputArray[k] = getGeneralMagicSquare(inputArray);
+                outputArray[k + 1] = getReflectedMatrix(outputArray[k]);
+            } else {
+                for (int w = 0; w < 2; w++) {
+                    outputArray[k + w] = getRotatedMatrix(outputArray[k - 2 + w]);
+                }
+            }
+        }
+
         return outputArray;
     }
 }
