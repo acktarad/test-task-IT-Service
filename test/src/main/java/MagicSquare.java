@@ -11,13 +11,12 @@ public class MagicSquare {
                 count++;
             }
         }
+        Arrays.sort(tempArray);
         return tempArray;
     }
 
     public boolean couldBeAMagicSquare(int[][] matrix) {
         int[] tempArray = twoDimensionalArrayToOne(matrix);
-
-        Arrays.sort(tempArray);
         int k;
         if (tempArray[0] != tempArray[tempArray.length - 1] / tempArray.length)
             return false;
@@ -114,5 +113,21 @@ public class MagicSquare {
             sum[i] = getDifference(arrayMatrix[i], arr);
         }
         return sum;
+    }
+
+    public int[][] getMagicSquare(int[][] inputArray){
+        int[][] outputArray = new int[inputArray.length][inputArray[0].length];
+        int[][][] tempArrayMatrix = getMagicSquareArray(inputArray);
+        int[] difference = getDifferenceArray(tempArrayMatrix, inputArray);
+        int indexOfMin = 0;
+        for (int i = 1; i < difference.length; i++)
+        {
+            if (difference[i] < difference[indexOfMin])
+            {
+                indexOfMin = i;
+            }
+        }
+        outputArray = tempArrayMatrix[indexOfMin];
+        return outputArray;
     }
 }
