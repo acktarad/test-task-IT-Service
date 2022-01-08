@@ -96,7 +96,23 @@ public class MagicSquare {
                 }
             }
         }
-
         return outputArray;
+    }
+
+    public int getDifference(int[][] ar1, int[][] ar2){
+        int sum = 0;
+        for (int i = 0; i < ar1.length; i++) {
+            for (int j = 0; j < ar1[0].length; j++) {
+                sum += Math.abs(ar1[i][j]-ar2[i][j]);
+            }
+        }
+        return sum;
+    }
+    public int[] getDifferenceArray(int[][][] arrayMatrix, int[][] arr){
+        int[] sum = new int[arrayMatrix.length];
+        for (int i = 0; i < arrayMatrix.length; i++) {
+            sum[i] = getDifference(arrayMatrix[i], arr);
+        }
+        return sum;
     }
 }
