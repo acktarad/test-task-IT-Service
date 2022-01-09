@@ -1,10 +1,15 @@
 package com.example.testtaskitservice.services;
 
+import com.example.testtaskitservice.model.ModelSquare;
+import com.example.testtaskitservice.repository.SquareRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 @Service
 public class MagicSquareService {
+    @Autowired
+    private SquareRepository squareRepository;
 
     public int[] twoDimensionalArrayToOne(int[][] matrix) {
         int count = 0;
@@ -143,4 +148,10 @@ public class MagicSquareService {
         }
         return null;
     }
+
+    public void save(int[][] date){
+        ModelSquare modelSquare = new ModelSquare(date);
+        squareRepository.save(modelSquare);
+    }
+
 }
