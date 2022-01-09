@@ -1,13 +1,11 @@
-package com.example.testtaskitsevice;
+package com.example.testtaskitservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestTaskItSeviceApplication {
-
+public class TestTaskItServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TestTaskItSeviceApplication.class, args);
+        SpringApplication.run(TestTaskItServiceApplication.class, args);
     }
-
 }
