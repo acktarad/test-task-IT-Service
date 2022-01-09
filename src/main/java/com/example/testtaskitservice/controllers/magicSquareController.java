@@ -1,16 +1,22 @@
 package com.example.testtaskitservice.controllers;
 
+import com.example.testtaskitservice.services.MagicSquareService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class magicSquareController {
-    @GetMapping("/calculate")
+    @Autowired
+    private MagicSquareService magicSquareService;
+    @PostMapping("/calculateSquare")
     public String calculate(Model model,
                             @RequestParam("topLeft") String topLeft,
                             @RequestParam("topCenter") String topCenter,
@@ -31,9 +37,16 @@ public class magicSquareController {
         inputArray[2][0] = Integer.valueOf(bottomLeft);
         inputArray[2][1] = Integer.valueOf(bottomCenter);
         inputArray[2][2] = Integer.valueOf(bottomRight);
-        model.addAllAttributes(Collections.singleton(inputArray));
+        int[][] tempArray = magicSquareService.getMagicSquare(inputArray);
+//        List outputArray = new ArrayList();
+//        for (int[] i : tempArray) {
+//            outputArray.addAll(Arrays.asList(i));
+//        }
+        int[][] outputArray = tempArray;
+        model.addAttribute("inputArray", inputArray);
+        model.addAttribute("outputArray", outputArray);
 
 
-        return "mainSquare";
+        return "resultSquare";
     }
 }

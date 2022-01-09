@@ -1,7 +1,9 @@
 package com.example.testtaskitservice.services;
 
-import java.util.Arrays;
+import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+@Service
 public class MagicSquareService {
 
     public int[] twoDimensionalArrayToOne(int[][] matrix) {
@@ -24,6 +26,14 @@ public class MagicSquareService {
             return false;
         else
             k = tempArray[tempArray.length - 1] / tempArray.length;
+        boolean allNonZero = false;
+        for (int i = 0; i < tempArray.length; i++) {
+            if(tempArray[i]!=0)
+                allNonZero = true;
+                break;
+        }
+        if (allNonZero == false)
+            return false;
         for (int i = 0; i < tempArray.length; i++) {
             if (tempArray[i] != i * k + k)
                 return false;
@@ -119,16 +129,18 @@ public class MagicSquareService {
     }
 
     public int[][] getMagicSquare(int[][] inputArray) {
-
-        int[][][] tempArrayMatrix = getMagicSquareArray(inputArray);
-        int[] difference = getDifferenceArray(tempArrayMatrix, inputArray);
-        int indexOfMin = 0;
-        for (int i = 1; i < difference.length; i++) {
-            if (difference[i] < difference[indexOfMin]) {
-                indexOfMin = i;
+        if(couldBeAMagicSquare(inputArray)){
+            int[][][] tempArrayMatrix = getMagicSquareArray(inputArray);
+            int[] difference = getDifferenceArray(tempArrayMatrix, inputArray);
+            int indexOfMin = 0;
+            for (int i = 1; i < difference.length; i++) {
+                if (difference[i] < difference[indexOfMin]) {
+                    indexOfMin = i;
+                }
             }
+            int[][] outputArray = tempArrayMatrix[indexOfMin];
+            return outputArray;
         }
-        int[][] outputArray = tempArrayMatrix[indexOfMin];
-        return outputArray;
+        return null;
     }
 }

@@ -1,9 +1,11 @@
 package com.example.testtaskitservice.services;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
-
-public class TaskOneService {
+@Service
+public class SubStringService {
     public String[] arrayOfSubstrings(String[] subStrings, String[] strings) {
         //        String[] a1 = {"arp", "live", "strong"};
 //        String[] a2 = {"lively", "alive", "harp", "sharp", "armstrong"};
