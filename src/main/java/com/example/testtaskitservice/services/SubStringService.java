@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class SubStringService {
 
@@ -35,7 +37,17 @@ public class SubStringService {
     }
 
     public void save(String[] substrings, String[] strings){
-        ModelSubString modelSubString = new ModelSubString(substrings, strings);
+
+        ModelSubString modelSubString = new ModelSubString(substrings,strings);
         substringrepository.save(modelSubString);
+    }
+
+    public List<ModelSubString> getAllSubstringTask(){
+        List<ModelSubString> allSubString = substringrepository.findAll();
+        return allSubString;
+    }
+
+    public Optional<ModelSubString> findById(Integer id){
+        return substringrepository.findById(id);
     }
 }

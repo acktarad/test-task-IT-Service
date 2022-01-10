@@ -20,22 +20,20 @@ public class ModelSubString {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String type;
-    private String substrings;
-    private String strings;
+    private String substring;
+    private String string;
 
     public String[] getSubstrings() {
-        String[] outputString = this.substrings.split(",");
-        return outputString;
+        return this.substring.split(",");
     }
 
     public String[] getStrings() {
-        String[] outputString = this.strings.split(",");
-        return outputString;
+        return this.string.split(",");
     }
 
     public ModelSubString(String substrings, String strings){
-        setStrings(strings);
-        setSubstrings(substrings);
+        setString(strings);
+        setSubstring(substrings);
 
     }
     public ModelSubString(String[] substrings, String[] strings){
@@ -46,14 +44,15 @@ public class ModelSubString {
                 sb.append(",");
             }
         }
-        setStrings(sb.toString());
+        setSubstring(sb.toString());
         StringBuilder sb1 = new StringBuilder();
         for (int i = 0; i < strings.length; i++) {
-            sb.append(strings[i]);
+            sb1.append(strings[i]);
             if (i != strings.length-1) {
                 sb1.append(",");
             }
         }
-        setSubstrings(sb1.toString());
+        setString(sb1.toString());
+
     }
 }

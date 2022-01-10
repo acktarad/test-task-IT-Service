@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class MagicSquareService {
     @Autowired
@@ -150,8 +153,18 @@ public class MagicSquareService {
     }
 
     public void save(int[][] date){
-        ModelSquare modelSquare = new ModelSquare(date);
+        ModelSquare modelSquare = new ModelSquare();
+        modelSquare.setData(date);
         squareRepository.save(modelSquare);
+    }
+
+    public List<ModelSquare> getAllSquare(){
+        List<ModelSquare> allSquare = squareRepository.findAll();
+        return allSquare;
+    }
+
+    public Optional<ModelSquare> findById(Integer id){
+        return squareRepository.findById(id);
     }
 
 }

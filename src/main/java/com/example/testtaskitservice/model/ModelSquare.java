@@ -23,7 +23,7 @@ public class ModelSquare {
     private String data;
 
 
-    public int[][] getData() {
+    public int[][] getDataArray() {
         int[][] date = new int[3][3];
         String[] temp = this.data.split(",");
         int count = -1;
@@ -45,7 +45,24 @@ public class ModelSquare {
                     sb.append(",");
             }
         }
+        System.out.println(sb.toString());
         setData(sb.toString());
+    }
+
+    public void setData(int[][] data){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[0].length; j++) {
+                sb.append(data[i][j]);
+                if (i != data.length - 1 | j != data[0].length - 1)
+                    sb.append(",");
+            }
+        }
+        this.data = sb.toString();
+    }
+
+    public void setData(String data){
+        this.data = data;
     }
 
     public ModelSquare(String data) {

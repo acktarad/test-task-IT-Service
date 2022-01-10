@@ -21,5 +21,8 @@
         <input type="text" name="strings" placeholder="Введите строки через запятую">
         <input type="submit" value="Посчитать">
     </form>
+    <form action="/download" method="post">
+        <input type="submit" value="Загрузить">
+    </form>
 </body>
 </html>

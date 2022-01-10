@@ -15,29 +15,26 @@
     </select>
     <input type="submit" value="Выбрать">
 </form>
-
-<form action="/calculateSquare" method="post">
-
+<form action="/saveSquare" method="post">
     <table width="40">
         <tr width="40">
-            <td><input type="text" value="${inputArray[0][0]}" name="topLeft"></td>
-            <td><input type="text" value="${inputArray[0][1]}" name="topCenter"></td>
-            <td><input type="text" value="${inputArray[0][2]}" name="topRight"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[0][0]}" name="topLeft"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[0][1]}" name="topCenter"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[0][2]}" name="topRight"></td>
         </tr>
         <tr width="40">
-            <td><input type="text" value="${inputArray[1][0]}" name="centerLeft"></td>
-            <td><input type="text" value="${inputArray[1][1]}" name="centerCenter"></td>
-            <td><input type="text" value="${inputArray[1][2]}" name="centerRight"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[1][0]}" name="centerLeft"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[1][1]}" name="centerCenter"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[1][2]}" name="centerRight"></td>
         </tr>
         <tr width="40">
-            <td><input type="text" value="${inputArray[2][0]}" name="bottomLeft"></td>
-            <td><input type="text" value="${inputArray[2][1]}" name="bottomCenter"></td>
-            <td><input type="text" value="${inputArray[2][2]}" name="bottomRight"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[2][0]}" name="bottomLeft"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[2][1]}" name="bottomCenter"></td>
+            <td><input type="number" min="0" step="1" value="${inputArray[2][2]}" name="bottomRight"></td>
         </tr>
     </table>
 
-
-    <input type="submit" value="Посчитать">
+    <input type="submit" value="Сохранить">
 </form>
 <#if outputArray??>
     <#list outputArray as output>

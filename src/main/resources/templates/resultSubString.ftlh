@@ -16,10 +16,10 @@
     <input type="submit" value="Выбрать">
 </form>
 
-<form action="/calculateSubString" method="post">
+<form action="/saveSubstring" method="post">
     <input type="text" name="substrings" placeholder="Введите подстроки через запятую" value="${inputArray[0]}">
     <input type="text" name="strings" placeholder="Введите строки через запятую" value="${inputArray[1]}">
-    <input type="submit" value="Посчитать">
+    <input type="submit" value="Сохранить">
 </form>
 <#list outputArray as output>
     <table width="400" class="output_table" border="1">

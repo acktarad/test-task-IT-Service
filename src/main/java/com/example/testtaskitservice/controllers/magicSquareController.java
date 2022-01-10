@@ -16,6 +16,7 @@ import java.util.List;
 public class magicSquareController {
     @Autowired
     private MagicSquareService magicSquareService;
+
     @PostMapping("/calculateSquare")
     public String calculate(Model model,
                             @RequestParam("topLeft") String topLeft,
@@ -26,7 +27,38 @@ public class magicSquareController {
                             @RequestParam("centerRight") String centerRight,
                             @RequestParam("bottomLeft") String bottomLeft,
                             @RequestParam("bottomCenter") String bottomCenter,
-                            @RequestParam("bottomRight") String bottomRight){
+                            @RequestParam("bottomRight") String bottomRight) {
+        int[][] inputArray = getArray(topLeft, topCenter, topRight, centerLeft, centerCenter, centerRight, bottomLeft, bottomCenter, bottomRight);
+        int[][] outputArray = magicSquareService.getMagicSquare(inputArray);
+        model.addAttribute("inputArray", inputArray);
+        model.addAttribute("outputArray", outputArray);
+        return "resultSquare";
+    }
+
+    @PostMapping("/saveSquare")
+    public String saveSquare(@RequestParam("topLeft") String topLeft,
+                             @RequestParam("topCenter") String topCenter,
+                             @RequestParam("topRight") String topRight,
+                             @RequestParam("centerLeft") String centerLeft,
+                             @RequestParam("centerCenter") String centerCenter,
+                             @RequestParam("centerRight") String centerRight,
+                             @RequestParam("bottomLeft") String bottomLeft,
+                             @RequestParam("bottomCenter") String bottomCenter,
+                             @RequestParam("bottomRight") String bottomRight) {
+        int[][] inputArray = getArray(topLeft, topCenter, topRight, centerLeft, centerCenter, centerRight, bottomLeft, bottomCenter, bottomRight);
+        magicSquareService.save(inputArray);
+        return "mainSquare";
+    }
+
+    private int[][] getArray(String topLeft,
+                             String topCenter,
+                             String topRight,
+                             String centerLeft,
+                             String centerCenter,
+                             String centerRight,
+                             String bottomLeft,
+                             String bottomCenter,
+                             String bottomRight) {
         int[][] inputArray = new int[3][3];
         inputArray[0][0] = Integer.valueOf(topLeft);
         inputArray[0][1] = Integer.valueOf(topCenter);
@@ -37,16 +69,9 @@ public class magicSquareController {
         inputArray[2][0] = Integer.valueOf(bottomLeft);
         inputArray[2][1] = Integer.valueOf(bottomCenter);
         inputArray[2][2] = Integer.valueOf(bottomRight);
-        int[][] tempArray = magicSquareService.getMagicSquare(inputArray);
-//        List outputArray = new ArrayList();
-//        for (int[] i : tempArray) {
-//            outputArray.addAll(Arrays.asList(i));
-//        }
-        int[][] outputArray = tempArray;
-        model.addAttribute("inputArray", inputArray);
-        model.addAttribute("outputArray", outputArray);
-
-
-        return "resultSquare";
+        return inputArray;
     }
+
+
+
 }
