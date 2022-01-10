@@ -5,9 +5,7 @@ import com.example.testtaskitservice.repository.SquareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -194,4 +192,7 @@ public class MagicSquareService {
             }
         }
     }
+
+
+
 }

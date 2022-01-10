@@ -39,8 +39,12 @@
 <form action="/download" method="post">
     <input type="submit" value="Загрузить">
 </form>
-<form action="importFile" method="post">
-    <input type="file" name="file">
+<form action="/importFile" method="post" enctype="multipart/form-data">
+    <label>
+        <input type="file" name="file">
+        <input type="submit" value="импортировать">
+    </label>
+
 </form>
 </body>
 </html>
