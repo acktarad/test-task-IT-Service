@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class mainController {
 
     @GetMapping("/")
-    public String main(){
+    public String main() {
         return "mainSquare";
     }
+
     @PostMapping("/taskSelection")
-    public String taskSelection(@RequestParam("combobox") String combobox){
-        if(combobox.equals("magicSquare"))
+    public String taskSelection(@RequestParam("combobox") String combobox) {
+        if (combobox.equals("magicSquare"))
             return "mainSquare";
         else
             return "mainSubString";

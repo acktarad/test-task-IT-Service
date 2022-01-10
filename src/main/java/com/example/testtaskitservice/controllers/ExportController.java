@@ -38,7 +38,7 @@ public class ExportController {
         return upload("substring" + id.toString() + ".txt");
     }
 
-    private ResponseEntity<Object> upload(String filename) throws IOException{
+    private ResponseEntity<Object> upload(String filename) throws IOException {
         File file = new File(filename);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
         HttpHeaders headers = new HttpHeaders();

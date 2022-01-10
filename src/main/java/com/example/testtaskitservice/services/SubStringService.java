@@ -18,10 +18,16 @@ public class SubStringService {
 
     @Autowired
     Substringrepository substringrepository;
+
+    /***
+     * Принимает на вход массивы подстрок и строк
+     * проверяет вхождение подстрок (содержет ли строка
+     * подстроку) в строки
+     * @param subStrings - массив подстрок
+     * @param strings
+     * @return
+     */
     public String[] arrayOfSubstrings(String[] subStrings, String[] strings) {
-        //        String[] a1 = {"arp", "live", "strong"};
-//        String[] a2 = {"lively", "alive", "harp", "sharp", "armstrong"};
-//        String[] a3 = {"tarp", "mice", "bull"};
         List<String> outputList = new ArrayList<>();
         for (int i = 0; i < subStrings.length; i++) {
             for (int j = 0; j < strings.length; j++) {
@@ -35,34 +41,40 @@ public class SubStringService {
         return outputList.toArray(outputArray);
     }
 
-    public void save(String substring, String string){
+    public void save(String substring, String string) {
         ModelSubString modelSubString = new ModelSubString(substring, string);
         substringrepository.save(modelSubString);
     }
 
-    public void save(String[] substrings, String[] strings){
-
-        ModelSubString modelSubString = new ModelSubString(substrings,strings);
+    public void save(String[] substrings, String[] strings) {
+        ModelSubString modelSubString = new ModelSubString(substrings, strings);
         substringrepository.save(modelSubString);
     }
 
-    public List<ModelSubString> getAllSubstringTask(){
+    public List<ModelSubString> getAllSubstringTask() {
         List<ModelSubString> allSubString = substringrepository.findAll();
         return allSubString;
     }
 
-    public Optional<ModelSubString> findById(Integer id){
+    public Optional<ModelSubString> findById(Integer id) {
         return substringrepository.findById(id);
     }
 
-    public void saveToFile(Integer id){
+    /***
+     * Приниает на вход id элемента
+     * сохраняет в файл тип задачи и
+     * данные для её повторного решения
+     * @param id - идентификатор задачи в БД
+     */
+    public void saveToFile(Integer id) {
+
         ModelSubString modelSubString = findById(id).get();
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
         try {
-            fileWriter = new FileWriter("substring"+id.toString()+".txt");
+            fileWriter = new FileWriter("substring" + id.toString() + ".txt");
             bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(String.format("%s|%s|%s\n",modelSubString.getType(), modelSubString.getSubstring(), modelSubString.getString()));
+            bufferedWriter.write(String.format("%s|%s|%s\n", modelSubString.getType(), modelSubString.getSubstring(), modelSubString.getString()));
             bufferedWriter.flush();
         } catch (IOException e) {
             System.out.println("Ошибка" + e.getMessage());

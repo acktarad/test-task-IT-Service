@@ -15,6 +15,12 @@ public class MagicSquareService {
     @Autowired
     private SquareRepository squareRepository;
 
+    /***
+     * Преобразует двумерный массив
+     * в одномерный
+     * @param matrix - двумерный массив
+     * @return - одномерный массив из элементов двумерного
+     */
     public int[] twoDimensionalArrayToOne(int[][] matrix) {
         int count = 0;
         int[] tempArray = new int[matrix.length * matrix[0].length];
@@ -28,6 +34,12 @@ public class MagicSquareService {
         return tempArray;
     }
 
+    /***
+     * Проверяет можно ли данную матрицу преобразовать
+     * в магический квадрат
+     * @param matrix - двумерный массив, который должен быть преобразован
+     * @return true, если преобразование возможно
+     */
     public boolean couldBeAMagicSquare(int[][] matrix) {
         int[] tempArray = twoDimensionalArrayToOne(matrix);
         int k;
@@ -37,9 +49,9 @@ public class MagicSquareService {
             k = tempArray[tempArray.length - 1] / tempArray.length;
         boolean allNonZero = false;
         for (int i = 0; i < tempArray.length; i++) {
-            if(tempArray[i]!=0)
+            if (tempArray[i] != 0)
                 allNonZero = true;
-                break;
+            break;
         }
         if (allNonZero == false)
             return false;
@@ -71,6 +83,12 @@ public class MagicSquareService {
         return outputArray;
     }
 
+    /***
+     * Располагает элементы матрицы так, как
+     * они должны распологаться в магическом квадрате
+     * @param inputArray - матрица, из которой должен получитьмя магический квадрат
+     * @return матрица с расположением элементов как в магическом квадрате
+     */
     public int[][] getGeneralMagicSquare(int[][] inputArray) {
         int[][] outputArray = new int[inputArray.length][inputArray[0].length];
         int[] tempArray = twoDimensionalArrayToOne(inputArray);
@@ -104,6 +122,14 @@ public class MagicSquareService {
         return outputArray;
     }
 
+    /***
+     * Метод получения всех 8 возможных магических квадатов
+     * из предложеной матрицы.
+     * Квадрат общего вида поворачивается вокруг центральной вертикали,
+     * а остальные 6 получаются путём поворота предыдущих на 90, 180 и 270 градусов.
+     * @param inputArray матрица, из которой надо получить магический квадрат
+     * @return - массив магических квадратов
+     */
     public int[][][] getMagicSquareArray(int[][] inputArray) {
         int[][][] outputArray = new int[8][inputArray.length][inputArray[0].length];
         for (int k = 0; k < outputArray.length - 1; k += 2) {
@@ -119,6 +145,13 @@ public class MagicSquareService {
         return outputArray;
     }
 
+    /***
+     * Метод вычисления "стоимости" квадрата
+     * Метод получения суммарной разницы между двумя матрицами
+     * @param ar1 - двумерный массив
+     * @param ar2 - двумерный массив
+     * @return - целое число, равное сумме разниц всех элементов матриц
+     */
     public int getDifference(int[][] ar1, int[][] ar2) {
         int sum = 0;
         for (int i = 0; i < ar1.length; i++) {
@@ -129,6 +162,12 @@ public class MagicSquareService {
         return sum;
     }
 
+    /***
+     * Метод вычисления цен всех квадратов относительно исходной матрицы
+     * @param arrayMatrix - массив из магических квадратов
+     * @param arr - исходная матрица
+     * @return - массив из цен магических квадратов
+     */
     public int[] getDifferenceArray(int[][][] arrayMatrix, int[][] arr) {
         int[] sum = new int[arrayMatrix.length];
         for (int i = 0; i < arrayMatrix.length; i++) {
@@ -137,8 +176,15 @@ public class MagicSquareService {
         return sum;
     }
 
+    /***
+     * Метод получения магического квадрата
+     * из двумерного массива
+     * @param inputArray - матрица из которой нужно получить магический квадра
+     *                   с наименьшей стоимостью
+     * @return - матрица, являющаяся магическим квадратом
+     */
     public int[][] getMagicSquare(int[][] inputArray) {
-        if(couldBeAMagicSquare(inputArray)){
+        if (couldBeAMagicSquare(inputArray)) {
             int[][][] tempArrayMatrix = getMagicSquareArray(inputArray);
             int[] difference = getDifferenceArray(tempArrayMatrix, inputArray);
             int indexOfMin = 0;
@@ -153,29 +199,35 @@ public class MagicSquareService {
         return null;
     }
 
-    public void save(int[][] date){
+    public void save(int[][] date) {
         ModelSquare modelSquare = new ModelSquare();
         modelSquare.setData(date);
         squareRepository.save(modelSquare);
     }
 
-    public List<ModelSquare> getAllSquare(){
+    public List<ModelSquare> getAllSquare() {
         List<ModelSquare> allSquare = squareRepository.findAll();
         return allSquare;
     }
 
-    public Optional<ModelSquare> findById(Integer id){
+    public Optional<ModelSquare> findById(Integer id) {
         return squareRepository.findById(id);
     }
 
-    public void saveToFile(Integer id){
+    /***
+     * Приниает на вход id элемента
+     * сохраняет в файл тип задачи и
+     * данные для её повторного решения
+     * @param id - идентификатор задачи в БД
+     */
+    public void saveToFile(Integer id) {
         ModelSquare modelSquare = findById(id).get();
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
         try {
-            fileWriter = new FileWriter("square"+id.toString()+".txt");
+            fileWriter = new FileWriter("square" + id.toString() + ".txt");
             bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(String.format("%s|%s\n",modelSquare.getType(), modelSquare.getData()));
+            bufferedWriter.write(String.format("%s|%s\n", modelSquare.getType(), modelSquare.getData()));
             bufferedWriter.flush();
         } catch (IOException e) {
             System.out.println("Ошибка" + e.getMessage());
@@ -192,7 +244,6 @@ public class MagicSquareService {
             }
         }
     }
-
 
 
 }

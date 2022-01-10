@@ -15,7 +15,7 @@ public class SubStringController {
     @PostMapping("/calculateSubString")
     public String calcSubString(Model model,
                                 @RequestParam("substrings") String substring,
-                                @RequestParam("strings") String string){
+                                @RequestParam("strings") String string) {
         String[] a1 = substring.split(",");
         String[] a2 = string.split(",");
         for (int i = 0; i < a1.length; i++) {
@@ -24,7 +24,7 @@ public class SubStringController {
         for (int i = 0; i < a2.length; i++) {
             a2[i] = a2[i].trim();
         }
-        String[] outputArray = subStringService.arrayOfSubstrings(a1,a2);
+        String[] outputArray = subStringService.arrayOfSubstrings(a1, a2);
 
         String[] inputArray = new String[2];
         inputArray[0] = substring;
@@ -33,9 +33,10 @@ public class SubStringController {
         model.addAttribute("outputArray", outputArray);
         return "resultSubString";
     }
+
     @PostMapping("/saveSubstring")
     public String saveSubString(@RequestParam("substrings") String substring,
-                                @RequestParam("strings") String string){
+                                @RequestParam("strings") String string) {
         String[] a1 = substring.split(",");
         String[] a2 = string.split(",");
         for (int i = 0; i < a1.length; i++) {
@@ -44,7 +45,7 @@ public class SubStringController {
         for (int i = 0; i < a2.length; i++) {
             a2[i] = a2[i].trim();
         }
-        subStringService.save(a1,a2);
+        subStringService.save(a1, a2);
         return "mainSubString";
     }
 }

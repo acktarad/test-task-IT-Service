@@ -31,16 +31,17 @@ public class ModelSubString {
         return this.string.split(",");
     }
 
-    public ModelSubString(String substrings, String strings){
+    public ModelSubString(String substrings, String strings) {
         setString(strings);
         setSubstring(substrings);
 
     }
-    public ModelSubString(String[] substrings, String[] strings){
+
+    public ModelSubString(String[] substrings, String[] strings) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < substrings.length; i++) {
             sb.append(substrings[i]);
-            if (i != substrings.length-1) {
+            if (i != substrings.length - 1) {
                 sb.append(",");
             }
         }
@@ -48,7 +49,7 @@ public class ModelSubString {
         StringBuilder sb1 = new StringBuilder();
         for (int i = 0; i < strings.length; i++) {
             sb1.append(strings[i]);
-            if (i != strings.length-1) {
+            if (i != strings.length - 1) {
                 sb1.append(",");
             }
         }

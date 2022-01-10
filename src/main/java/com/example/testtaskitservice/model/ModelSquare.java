@@ -45,11 +45,10 @@ public class ModelSquare {
                     sb.append(",");
             }
         }
-        System.out.println(sb.toString());
         setData(sb.toString());
     }
 
-    public void setData(int[][] data){
+    public void setData(int[][] data) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[0].length; j++) {
@@ -61,7 +60,7 @@ public class ModelSquare {
         this.data = sb.toString();
     }
 
-    public void setData(String data){
+    public void setData(String data) {
         this.data = data;
     }
 
