@@ -39,5 +39,8 @@
 <form action="/download" method="post">
     <input type="submit" value="Загрузить">
 </form>
+<form action="importFile" method="post">
+    <input type="file" name="file">
+</form>
 </body>
 </html>

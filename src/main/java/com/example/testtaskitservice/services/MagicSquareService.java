@@ -5,6 +5,9 @@ import com.example.testtaskitservice.repository.SquareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -167,4 +170,28 @@ public class MagicSquareService {
         return squareRepository.findById(id);
     }
 
+    public void saveToFile(Integer id){
+        ModelSquare modelSquare = findById(id).get();
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            fileWriter = new FileWriter("square"+id.toString()+".txt");
+            bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(String.format("%s|%s\n",modelSquare.getType(), modelSquare.getData()));
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            System.out.println("Ошибка" + e.getMessage());
+        } finally {
+            try {
+                if (fileWriter != null)
+                    fileWriter.close();
+            } catch (IOException ignore) {
+            }
+            try {
+                if (bufferedWriter != null)
+                    bufferedWriter.close();
+            } catch (IOException ignore) {
+            }
+        }
+    }
 }

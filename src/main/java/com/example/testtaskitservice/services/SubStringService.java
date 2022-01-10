@@ -1,10 +1,14 @@
 package com.example.testtaskitservice.services;
 
+import com.example.testtaskitservice.model.ModelSquare;
 import com.example.testtaskitservice.model.ModelSubString;
 import com.example.testtaskitservice.repository.Substringrepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -49,5 +53,30 @@ public class SubStringService {
 
     public Optional<ModelSubString> findById(Integer id){
         return substringrepository.findById(id);
+    }
+
+    public void saveToFile(Integer id){
+        ModelSubString modelSubString = findById(id).get();
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            fileWriter = new FileWriter("substring"+id.toString()+".txt");
+            bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(String.format("%s|%s|%s\n",modelSubString.getType(), modelSubString.getSubstring(), modelSubString.getString()));
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            System.out.println("Ошибка" + e.getMessage());
+        } finally {
+            try {
+                if (fileWriter != null)
+                    fileWriter.close();
+            } catch (IOException ignore) {
+            }
+            try {
+                if (bufferedWriter != null)
+                    bufferedWriter.close();
+            } catch (IOException ignore) {
+            }
+        }
     }
 }

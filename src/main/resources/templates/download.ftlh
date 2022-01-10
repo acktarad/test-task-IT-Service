@@ -35,6 +35,10 @@
                             <input type="hidden" value="${square.id}" name="squareId">
                             <input type="submit" value="Загрузить">
                         </form>
+                        <form action="/exportSquare" target="_blank" method="post">
+                            <input type="hidden" value="${square.id}" name="squareId">
+                            <input type="submit" value="Экспортировать">
+                        </form>
                     </td>
                 </tr>
             </div>
@@ -55,6 +59,10 @@
                         <form action="/downloadSubstring" method="post">
                             <input type="hidden" value="${subString.id}" name="subStringId">
                             <input type="submit" value="Загрузить">
+                        </form>
+                        <form action="/exportSubstring" target="_blank" method="post">
+                            <input type="hidden" value="${subString.id}" name="subStringId">
+                            <input type="submit" value="Экспортировать">
                         </form>
                     </td>
                 </tr>
