@@ -28,11 +28,11 @@ public class ImportController {
     public String imp(Model model,
                       @RequestParam("file") MultipartFile file) throws IOException {
         if (!file.isEmpty()){
-            String filename = UUID.randomUUID().toString();
-            file.transferTo(new File("/" + filename));
-            String[] tempStringArray = importService.readFile( filename);
+            String tempString = new String(file.getBytes());
+            String[] tempStringArray = tempString.replaceAll("\n", "").split("\\|");
             if (tempStringArray[0].equals("MagicSquare")) {
-                ModelSquare modelSquare = new ModelSquare(tempStringArray[1]);
+                ModelSquare modelSquare = new ModelSquare();
+                modelSquare.setData(tempStringArray[1]);
                 int[][] inputArray = modelSquare.getDataArray();
                 int[][] outputArray = magicSquareService.getMagicSquare(inputArray);
                 model.addAttribute("inputArray", inputArray);

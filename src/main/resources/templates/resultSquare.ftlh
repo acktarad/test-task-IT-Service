@@ -36,6 +36,9 @@
 
     <input type="submit" value="Сохранить">
 </form>
+<form action="/download" method="post">
+    <input type="submit" value="Загрузить">
+</form>
 <#if outputArray??>
     <#list outputArray as output>
         <table width="400"  border="1">
@@ -50,6 +53,5 @@
 <#else>
     Составление магического квадрата из данного набора чисел невозможно
 </#if>
-
 </body>
 </html>

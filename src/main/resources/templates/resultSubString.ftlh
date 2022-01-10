@@ -17,9 +17,14 @@
 </form>
 
 <form action="/saveSubstring" method="post">
-    <input type="text" name="substrings" placeholder="Введите подстроки через запятую" value="${inputArray[0]}">
-    <input type="text" name="strings" placeholder="Введите строки через запятую" value="${inputArray[1]}">
+    <label>
+        <input type="text" name="substrings" placeholder="Введите подстроки через запятую" value="${inputArray[0]}">
+        <input type="text" name="strings" placeholder="Введите строки через запятую" value="${inputArray[1]}">
+    </label>
     <input type="submit" value="Сохранить">
+</form>
+<form action="/download" method="post">
+    <input type="submit" value="Загрузить">
 </form>
 <#list outputArray as output>
     <table width="400" class="output_table" border="1">
@@ -29,5 +34,6 @@
     </table>
 
 </#list>
+
 </body>
 </html>
